@@ -10,7 +10,7 @@ public class EmployeeManagementSystemApplication {
 
 	public static void main(String[] args) {
 		SpringApplication.run(EmployeeManagementSystemApplication.class, args);
-		System.out.println("God's Grace is all i Need.");
+		System.out.println("God's Grace is all i Need");
 	}
 
 }
