@@ -2,22 +2,32 @@ package com.zechariah.employeemanagementsystem;
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.web.servlet.config.annotation.ResourceHandlerRegistry;
 import springfox.documentation.builders.ApiInfoBuilder;
+import springfox.documentation.builders.PathSelectors;
+import springfox.documentation.builders.RequestHandlerSelectors;
 import springfox.documentation.service.ApiInfo;
 import springfox.documentation.service.Contact;
 import springfox.documentation.spi.DocumentationType;
 import springfox.documentation.spring.web.plugins.Docket;
 import springfox.documentation.swagger2.annotations.EnableSwagger2;
+import springfox.documentation.swagger2.annotations.EnableSwagger2WebMvc;
 
 @EnableSwagger2
 @Configuration
-public class EmployeeDocumentationConfig {
+@EnableSwagger2WebMvc
+public class EmployeeDocumentationConfig implements EmployeeApiDocs {
 
     public static final Contact SUPPORTED_CONTACTS = new Contact("Zechariah", "https://www.codexive.com", "codesupport@mail.com");
 
     @Bean
     public Docket docketApiDocs(){
-        return new Docket(DocumentationType.SWAGGER_2).apiInfo(apiInformation());
+        return new Docket(DocumentationType.SWAGGER_2)
+                .select()
+                .apis(RequestHandlerSelectors.any())
+                .paths(PathSelectors.any())
+                .build()
+                .apiInfo(apiInformation());
     }
 
     private ApiInfo apiInformation() {
@@ -28,6 +38,15 @@ public class EmployeeDocumentationConfig {
                 .license("Employee Management System Licence")
                 .version("2.0")
                 .build();
+    }
+
+    @Override
+    public void addResourceHandlers(ResourceHandlerRegistry registry) {
+        registry.addResourceHandler("swagger-ui.html")
+                .addResourceLocations("classpath:/META-INF/resources/");
+
+        registry.addResourceHandler("/webjars/**")
+                .addResourceLocations("classpath:/META-INF/resources/webjars/");
     }
 
 }
