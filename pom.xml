@@ -46,6 +46,7 @@
 			<artifactId>spring-boot-starter-test</artifactId>
 			<scope>test</scope>
 		</dependency>
+<<<<<<< HEAD
 		<!-- https://mvnrepository.com/artifact/io.springfox/springfox-boot-starter -->
 		<dependency>
 			<groupId>io.springfox</groupId>
@@ -59,6 +60,8 @@
 			<version>3.0.0</version>
 		</dependency>
 
+=======
+>>>>>>> d5f0e72be97db0198b9640b8abc93ac370b56464
 	</dependencies>
 
 	<build>
