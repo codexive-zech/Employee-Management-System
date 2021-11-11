@@ -5,7 +5,12 @@ import com.zechariah.employeemanagementsystem.service.EmployeeServiceImplement;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
+
+import javax.validation.Valid;
 
 @Controller
 public class EmployeeController {
@@ -27,13 +32,13 @@ public class EmployeeController {
     }
 
     @PostMapping("/saveEmployee")
-    public String saveEmployee(@ModelAttribute ("employee") Employee employee){
+    public String saveEmployee(@Valid @ModelAttribute ("employee") Employee employee){
         employeeServiceImplement.saveEmployee(employee);
         return "redirect:/";
     }
 
     @GetMapping("/showFormForUpdate/{id}")
-    public String updateEmployee(@PathVariable Long id, Model model){
+    public String updateEmployee(@Valid @PathVariable Long id, Model model){
         Employee employee = employeeServiceImplement.getEmployeeById(id);
         model.addAttribute("employee", employee);
         return "update_employee";

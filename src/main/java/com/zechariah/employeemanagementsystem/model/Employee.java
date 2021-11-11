@@ -1,6 +1,9 @@
 package com.zechariah.employeemanagementsystem.model;
 
 import javax.persistence.*;
+import javax.validation.constraints.Email;
+import javax.validation.constraints.NotEmpty;
+import javax.validation.constraints.Size;
 
 @Entity
 @Table(name = "employee")
@@ -11,12 +14,18 @@ public class Employee {
     private Long id;
 
     @Column (name = "first_name")
+    @NotEmpty
+    @Size(min = 2, message = "First Name Cannot Be Less Than 2")
     private String firstName;
 
     @Column (name = "last_name")
+    @NotEmpty
+    @Size(min = 2, message = "Last Name Cannot Be Less Than 2")
     private String lastName;
 
     @Column (name = "email")
+    @NotEmpty
+    @Email
     private String email;
 
     public Employee(Long id, String firstName, String lastName, String email) {
